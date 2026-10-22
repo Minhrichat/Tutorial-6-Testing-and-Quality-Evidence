@@ -1,0 +1,10 @@
+PASS  GET /health -> 200
+PASS  POST /api/employees -> 201, 4 modules assigned
+PASS  Completing M02 before M01 -> 409
+PASS  M01 score 50 (<70) -> not passed
+PASS  M01 score 85 -> PASSED, progress 25%
+PASS  M02 score 90 -> PASSED, progress 50%
+PASS  M04 score 75 -> PASSED, progress 75%
+PASS  M05 score 95 -> PASSED, progress 100%
+PASS  onboarding_status = COMPLETED, 100%
+SMOKE TEST OK

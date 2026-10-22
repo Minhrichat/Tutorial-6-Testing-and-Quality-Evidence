@@ -1,0 +1,8 @@
+employees in DB: 1000
+conditions: users=20 duration=30s employees=1000 server=Flask dev (threaded) db=SQLite
+requests=11641 throughput=385.8 req/s errors(5xx/conn)=0
+latency ms: p50=38.3 p95=128.1 p99=232.8 max=1483.0
+  GET progress   n= 8740 p50=34.1 p95=112.3
+  GET list       n= 1139 p50=52.7 p95=123.3
+  POST complete  n= 1762 p50=52.7 p95=226.1
+RESULT: PASS (p95 < 300 ms, 0 5xx errors)

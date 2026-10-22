@@ -1,0 +1,48 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.7.0 -- /usr/bin/python
+rootdir: /home/claude/pizzahut-onboarding
+configfile: pytest.ini
+testpaths: tests
+collecting ... collected 39 items
+
+tests/test_slice.py::test_health PASSED                                  [  2%]
+tests/test_slice.py::test_fr_onb_02_create_assigns_plan_by_role PASSED   [  5%]
+tests/test_slice.py::test_fr_onb_01_validation_errors[patch0-email] PASSED [  7%]
+tests/test_slice.py::test_fr_onb_01_validation_errors[patch1-full_name] PASSED [ 10%]
+tests/test_slice.py::test_fr_onb_01_validation_errors[patch2-store_code] PASSED [ 12%]
+tests/test_slice.py::test_fr_onb_01_validation_errors[patch3-role_code] PASSED [ 15%]
+tests/test_slice.py::test_fr_onb_01_duplicate_email_conflict PASSED      [ 17%]
+tests/test_slice.py::test_fr_onb_03_pass_updates_progress PASSED         [ 20%]
+tests/test_slice.py::test_fr_onb_03_fail_keeps_assigned_and_counts_attempt PASSED [ 23%]
+tests/test_slice.py::test_fr_onb_03_prerequisite_order_enforced PASSED   [ 25%]
+tests/test_slice.py::test_fr_onb_03_cannot_resubmit_passed_module PASSED [ 28%]
+tests/test_slice.py::test_fr_onb_03_invalid_score[-1] PASSED             [ 30%]
+tests/test_slice.py::test_fr_onb_03_invalid_score[101] PASSED            [ 33%]
+tests/test_slice.py::test_fr_onb_03_invalid_score[90] PASSED             [ 35%]
+tests/test_slice.py::test_fr_onb_03_invalid_score[None] PASSED           [ 38%]
+tests/test_slice.py::test_fr_onb_03_invalid_score[3.5] PASSED            [ 41%]
+tests/test_slice.py::test_fr_onb_03_invalid_score[True] PASSED           [ 43%]
+tests/test_slice.py::test_fr_onb_03_unknown_employee_and_unassigned_module PASSED [ 46%]
+tests/test_slice.py::test_fr_onb_04_full_flow_completes_onboarding PASSED [ 48%]
+tests/test_slice.py::test_migrate_and_seed_are_idempotent PASSED         [ 51%]
+tests/test_tutorial6.py::test_tc01_create_crew_assigns_4_modules PASSED  [ 53%]
+tests/test_tutorial6.py::test_tc02_pass_first_module_gives_25_percent PASSED [ 56%]
+tests/test_tutorial6.py::test_tc03_full_flow_completed PASSED            [ 58%]
+tests/test_tutorial6.py::test_tc04_invalid_email_rejected PASSED         [ 61%]
+tests/test_tutorial6.py::test_tc05_duplicate_email_case_insensitive PASSED [ 64%]
+tests/test_tutorial6.py::test_tc06_prerequisite_order PASSED             [ 66%]
+tests/test_tutorial6.py::test_tc07_invalid_score_types PASSED            [ 69%]
+tests/test_tutorial6.py::test_tc08_malformed_json_returns_json_error PASSED [ 71%]
+tests/test_tutorial6.py::test_tc09_score_equals_pass_mark_passes_and_below_fails PASSED [ 74%]
+tests/test_tutorial6.py::test_tc10_score_bounds_0_and_100_accepted PASSED [ 76%]
+tests/test_tutorial6.py::test_tc11_full_name_length_boundaries PASSED    [ 79%]
+tests/test_tutorial6.py::test_tc12_sql_injection_stored_literally PASSED [ 82%]
+tests/test_tutorial6.py::test_tc13_script_in_name_rejected PASSED        [ 84%]
+tests/test_tutorial6.py::test_tc14_ui_escapes_dynamic_text PASSED        [ 87%]
+tests/test_tutorial6.py::test_tc15_errors_are_json_for_unknown_routes_and_methods PASSED [ 89%]
+tests/test_tutorial6.py::test_tc16_security_headers_present PASSED       [ 92%]
+tests/test_tutorial6.py::test_tc17_no_secret_files_or_hardcoded_secrets PASSED [ 94%]
+tests/test_tutorial6.py::test_tc18_endpoints_require_authentication XFAIL [ 97%]
+tests/test_tutorial6.py::test_tc19_concurrent_double_submit_counts_once PASSED [100%]
+
+======================== 38 passed, 1 xfailed in 0.95s =========================

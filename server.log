@@ -1,0 +1,20 @@
+ * Serving Flask app 'app'
+ * Debug mode: off
+2026-10-19 10:33:22,974 INFO [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5055
+2026-10-19 10:33:22,974 INFO [33mPress CTRL+C to quit[0m
+2026-10-19 10:33:24,937 INFO 127.0.0.1 - - [19/Oct/2026 10:33:24] "GET /health HTTP/1.1" 200 -
+2026-10-19 10:33:24,941 INFO created employee id=1
+2026-10-19 10:33:24,941 INFO 127.0.0.1 - - [19/Oct/2026 10:33:24] "[35m[1mPOST /api/employees HTTP/1.1[0m" 201 -
+2026-10-19 10:33:24,943 WARNING POST /api/employees/1/modules/2/complete -> 409 complete module 'Welcome & Pizza Hut Culture' first
+2026-10-19 10:33:24,944 INFO 127.0.0.1 - - [19/Oct/2026 10:33:24] "[31m[1mPOST /api/employees/1/modules/2/complete HTTP/1.1[0m" 409 -
+2026-10-19 10:33:24,947 INFO emp=1 module=1 score=50 passed=False
+2026-10-19 10:33:24,947 INFO 127.0.0.1 - - [19/Oct/2026 10:33:24] "POST /api/employees/1/modules/1/complete HTTP/1.1" 200 -
+2026-10-19 10:33:24,950 INFO emp=1 module=1 score=85 passed=True
+2026-10-19 10:33:24,951 INFO 127.0.0.1 - - [19/Oct/2026 10:33:24] "POST /api/employees/1/modules/1/complete HTTP/1.1" 200 -
+2026-10-19 10:33:24,954 INFO emp=1 module=2 score=90 passed=True
+2026-10-19 10:33:24,954 INFO 127.0.0.1 - - [19/Oct/2026 10:33:24] "POST /api/employees/1/modules/2/complete HTTP/1.1" 200 -
+2026-10-19 10:33:24,957 INFO emp=1 module=4 score=75 passed=True
+2026-10-19 10:33:24,957 INFO 127.0.0.1 - - [19/Oct/2026 10:33:24] "POST /api/employees/1/modules/4/complete HTTP/1.1" 200 -
+2026-10-19 10:33:24,960 INFO emp=1 module=5 score=95 passed=True
+2026-10-19 10:33:24,960 INFO 127.0.0.1 - - [19/Oct/2026 10:33:24] "POST /api/employees/1/modules/5/complete HTTP/1.1" 200 -

@@ -1,0 +1,3 @@
+before=(200, 800, 1) after=(200, 800, 1) integrity_check=ok health={'status': 'ok'} emp1_progress=25%
+backup_time=2 ms restore+verify(RTO)=15 ms
+RESULT: PASS

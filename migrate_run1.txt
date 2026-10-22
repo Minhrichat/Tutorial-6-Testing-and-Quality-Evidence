@@ -1,0 +1,2 @@
+migrations applied: ['001_init.sql']
+seed files run: 1
