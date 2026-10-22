@@ -1,0 +1,109 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.1.1, pluggy-1.7.0 -- /usr/bin/python
+rootdir: /home/claude/pizzahut-onboarding
+configfile: pytest.ini
+collecting ... collected 19 items
+
+tests/test_tutorial6.py::test_tc01_create_crew_assigns_4_modules PASSED  [  5%]
+tests/test_tutorial6.py::test_tc02_pass_first_module_gives_25_percent PASSED [ 10%]
+tests/test_tutorial6.py::test_tc03_full_flow_completed PASSED            [ 15%]
+tests/test_tutorial6.py::test_tc04_invalid_email_rejected PASSED         [ 21%]
+tests/test_tutorial6.py::test_tc05_duplicate_email_case_insensitive PASSED [ 26%]
+tests/test_tutorial6.py::test_tc06_prerequisite_order PASSED             [ 31%]
+tests/test_tutorial6.py::test_tc07_invalid_score_types PASSED            [ 36%]
+tests/test_tutorial6.py::test_tc08_malformed_json_returns_json_error PASSED [ 42%]
+tests/test_tutorial6.py::test_tc09_score_equals_pass_mark_passes_and_below_fails PASSED [ 47%]
+tests/test_tutorial6.py::test_tc10_score_bounds_0_and_100_accepted PASSED [ 52%]
+tests/test_tutorial6.py::test_tc11_full_name_length_boundaries FAILED    [ 57%]
+tests/test_tutorial6.py::test_tc12_sql_injection_stored_literally PASSED [ 63%]
+tests/test_tutorial6.py::test_tc13_script_in_name_rejected FAILED        [ 68%]
+tests/test_tutorial6.py::test_tc14_ui_escapes_dynamic_text FAILED        [ 73%]
+tests/test_tutorial6.py::test_tc15_errors_are_json_for_unknown_routes_and_methods FAILED [ 78%]
+tests/test_tutorial6.py::test_tc16_security_headers_present FAILED       [ 84%]
+tests/test_tutorial6.py::test_tc17_no_secret_files_or_hardcoded_secrets PASSED [ 89%]
+tests/test_tutorial6.py::test_tc18_endpoints_require_authentication FAILED [ 94%]
+tests/test_tutorial6.py::test_tc19_concurrent_double_submit_counts_once PASSED [100%]
+
+=================================== FAILURES ===================================
+____________________ test_tc11_full_name_length_boundaries _____________________
+
+client = <FlaskClient <Flask 'app'>>
+
+    def test_tc11_full_name_length_boundaries(client):                         # FR-ONB-01
+        assert emp(client, email="1@x.vn", name="A").status_code == 400
+        assert emp(client, email="2@x.vn", name="An").status_code == 201
+        assert emp(client, email="3@x.vn", name="A" * 100).status_code == 201
+>       assert emp(client, email="4@x.vn", name="A" * 10000).status_code == 400   # DEF-01
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 201 == 400
+E        +  where 201 = <WrapperTestResponse streamed [201 CREATED]>.status_code
+E        +    where <WrapperTestResponse streamed [201 CREATED]> = emp(<FlaskClient <Flask 'app'>>, email='4@x.vn', name=('A' * 10000))
+
+tests/test_tutorial6.py:97: AssertionError
+------------------------------ Captured log call -------------------------------
+WARNING  onboarding:app.py:36 POST /api/employees -> 400 full_name phai co it nhat 2 ky tu
+______________________ test_tc13_script_in_name_rejected _______________________
+
+client = <FlaskClient <Flask 'app'>>
+
+    def test_tc13_script_in_name_rejected(client):                             # RISK-SEC-02 (XSS) DEF-02
+>       assert emp(client, name="<script>alert(1)</script>").status_code == 400
+E       AssertionError: assert 201 == 400
+E        +  where 201 = <WrapperTestResponse streamed [201 CREATED]>.status_code
+E        +    where <WrapperTestResponse streamed [201 CREATED]> = emp(<FlaskClient <Flask 'app'>>, name='<script>alert(1)</script>')
+
+tests/test_tutorial6.py:110: AssertionError
+______________________ test_tc14_ui_escapes_dynamic_text _______________________
+
+    def test_tc14_ui_escapes_dynamic_text():                                   # RISK-SEC-02 DEF-02
+        html = (ROOT / "templates" / "index.html").read_text(encoding="utf-8")
+>       assert "function esc(" in html
+E       assert 'function esc(' in '<!doctype html>\n<html lang="vi">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<title>Pizza Hut Onboarding & Training</title>\n<style>\n  :root { --red:#C8102E; --dark:#1f1f1f; --bg:#faf7f2; --ok:#1b7f3b; --warn:#b26a00; }\n  * { box-sizing:border-box; }\n  body { font-family: Arial, sans-serif; background:var(--bg); color:var(--dark); margin:0; }\n  header { background:var(--red); color:#fff; padding:14px 24px; font-size:20px; font-weight:bold; }\n  main { max-width:960px; margin:20px auto; padding:0 16px; display:grid; gap:16px; }\n  section { background:#fff; border-radius:8px; padding:16px; box-shadow:0 1px 3px rgba(0,0,0,.12); }\n  h2 { margin:0 0 10px; font-size:16px; color:var(--red); }\n  label { display:block; font-size:13px; margin-top:8px; }\n  input, select { width:100%; padding:7px; margin-top:3px; border:1px solid #bbb; border-radius:4px; }\n  button { background:var(--red); color:#fff; border:0; border-radius:4px; padding:8px 14px; cursor:pointer; margin-top:10px; }\n  button:disabled { background:#aaa; cursor:not-allowed; }\n  table { width:100%; border-collapse:collapse; font-size:14px; }\n  th, td { bord..._id})">Nộp</button>`}</td></tr>`).join("");\n}\nasync function loadProgress() { render(await api(`/api/employees/${$("employee").value}/progress`)); }\n\nasync function submitScore(moduleId) {\n  const raw = $("s" + moduleId).value;\n  try {\n    const res = await api(`/api/employees/${$("employee").value}/modules/${moduleId}/complete`,\n      {method:"POST", body:{score: raw === "" ? null : Number(raw)}});\n    render(res);\n    say($("msgModule"), res.attempt.passed ? "Đạt! Tiến độ đã được cập nhật." : "Chưa đạt, hãy thử lại.", res.attempt.passed);\n  } catch (e) { say($("msgModule"), e.message, false); }\n}\n$("btnCreate").onclick = async () => {\n  try {\n    const res = await api("/api/employees", {method:"POST", body:{\n      full_name:$("full_name").value, email:$("email").value,\n      role_code:$("role_code").value, store_code:$("store_code").value}});\n    say($("msgCreate"), `Đã tạo nhân viên #${res.employee.id} và giao ${res.total_count} module.`, true);\n    await loadEmployees(res.employee.id);\n  } catch (e) { say($("msgCreate"), e.message, false); }\n};\n$("employee").onchange = loadProgress;\nloadRoles().then(() => loadEmployees());\n</script>\n</body>\n</html>\n'
+
+tests/test_tutorial6.py:115: AssertionError
+___________ test_tc15_errors_are_json_for_unknown_routes_and_methods ___________
+
+client = <FlaskClient <Flask 'app'>>
+
+    def test_tc15_errors_are_json_for_unknown_routes_and_methods(client):      # NFR API consistency DEF-03
+        for method, path in [("get", "/api/nope"), ("get", "/api/employees/abc/progress"), ("delete", "/api/employees")]:
+            r = getattr(client, method)(path)
+>           assert r.is_json and "error" in r.get_json(), (method, path, r.status_code)
+E           AssertionError: ('get', '/api/nope', 404)
+E           assert (False)
+E            +  where False = <WrapperTestResponse streamed [404 NOT FOUND]>.is_json
+
+tests/test_tutorial6.py:122: AssertionError
+______________________ test_tc16_security_headers_present ______________________
+
+client = <FlaskClient <Flask 'app'>>
+
+    def test_tc16_security_headers_present(client):                            # RISK-SEC-03 DEF-04
+        r = client.get("/")
+>       assert r.headers.get("X-Content-Type-Options") == "nosniff"
+E       AssertionError: assert None == 'nosniff'
+E        +  where None = get('X-Content-Type-Options')
+E        +    where get = Headers([('Content-Type', 'text/html; charset=utf-8'), ('Content-Length', '5938')]).get
+E        +      where Headers([('Content-Type', 'text/html; charset=utf-8'), ('Content-Length', '5938')]) = <WrapperTestResponse streamed [200 OK]>.headers
+
+tests/test_tutorial6.py:127: AssertionError
+__________________ test_tc18_endpoints_require_authentication __________________
+
+client = <FlaskClient <Flask 'app'>>
+
+    def test_tc18_endpoints_require_authentication(client):                    # RISK-SEC-05 DEF-05 (known gap)
+>       assert client.get("/api/employees").status_code == 401
+E       AssertionError: assert 200 == 401
+E        +  where 200 = <WrapperTestResponse streamed [200 OK]>.status_code
+E        +    where <WrapperTestResponse streamed [200 OK]> = get('/api/employees')
+E        +      where get = <FlaskClient <Flask 'app'>>.get
+
+tests/test_tutorial6.py:139: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_tutorial6.py::test_tc11_full_name_length_boundaries - Asser...
+FAILED tests/test_tutorial6.py::test_tc13_script_in_name_rejected - Assertion...
+FAILED tests/test_tutorial6.py::test_tc14_ui_escapes_dynamic_text - assert 'f...
+FAILED tests/test_tutorial6.py::test_tc15_errors_are_json_for_unknown_routes_and_methods
+FAILED tests/test_tutorial6.py::test_tc16_security_headers_present - Assertio...
+FAILED tests/test_tutorial6.py::test_tc18_endpoints_require_authentication - ...
+========================= 6 failed, 13 passed in 0.67s =========================

@@ -1,0 +1,2 @@
+migrations applied: none (up to date)
+seed files run: 1

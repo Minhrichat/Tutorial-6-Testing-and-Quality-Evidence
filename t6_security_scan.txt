@@ -1,0 +1,9 @@
+== secret scan (regex) ==
+none found
+== .env present? ==
+.env not present (only .env.example)
+== response headers / error format ==
+{'X-Content-Type-Options': 'nosniff', 'X-Frame-Options': 'DENY', 'Referrer-Policy': 'no-referrer'}
+404 NOT_FOUND
+2026-10-19 10:35:15,711 WARNING POST /api/employees -> 400 request body must be a JSON object
+400 {'error': {'code': 'VALIDATION_ERROR', 'message': 'request body must be a JSON object'}}
